@@ -37,3 +37,10 @@ class Evento(models.Model):
 
 class EventoCientifico(Evento):
     issn = models.CharField(max_length=200)
+TIPO = (('professor',u'Professor'), ('aluno',u'Aluno'), ('profissional',u'Profissional'))
+
+class InscricaoEvento(models.Model):
+    participantes = models.ManyToManyField(PessoaFisica)
+    qtdParticipantes = models.PositiveIntegerField(default=0)
+    dataEHoraInscricao = models.DateTimeField(default=timezone.now)
+    tipoInscricao = models.CharField(max_length=16, choices=TIPO)
